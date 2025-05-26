@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Puzzle Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Word Puzzle Game</h1>
+        
+        <div class="game-area">
+            <div class="scorebar">
+                <div class="score-counter">Score: <span id="score">0</span></div>
+            </div>
+
+            <div class="board-container">
+                <div class="gameboard">
+                    <!-- 3x4 grid for the letters -->
+                    <div class="letter" data-position="0-0"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">WO</div></div></div>
+                    <div class="letter" data-position="1-0"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">RD</div></div></div>
+                    <div class="letter" data-position="2-0"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">PU</div></div></div>
+                    <div class="letter" data-position="0-1"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">ZZ</div></div></div>
+                    <div class="letter" data-position="1-1"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">LE</div></div></div>
+                    <div class="letter" data-position="2-1"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">GA</div></div></div>
+                    <div class="letter" data-position="0-2"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">ME</div></div></div>
+                    <div class="letter" data-position="1-2"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">FU</div></div></div>
+                    <div class="letter" data-position="2-2"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">NN</div></div></div>
+                    <div class="letter" data-position="0-3"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">PL</div></div></div>
+                    <div class="letter" data-position="1-3"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">AY</div></div></div>
+                    <div class="letter" data-position="2-3"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">ER</div></div></div>
+                </div>
+            </div>
+
+            <div class="game-input">
+                <div class="word-display">
+                    <ul id="current-word" class="flex"></ul>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="control-button" id="shuffle-button">Shuffle</button>
+                <button class="control-button" id="clear-button">Clear</button>
+            </div>
+        </div>
+
+        <div class="foundwords-container">
+            <h2>Found Words</h2>
+            <div class="words-counter">Words found: <b><span id="found-count">0</span> / <span id="total-count">0</span></b></div>
+            
+            <div class="foundwords-tabs">
+                <button class="foundwords-tab active" data-sort="order">By order</button>
+                <button class="foundwords-tab" data-sort="length">By length</button>
+            </div>
+            
+            <div class="foundwords-list-container">
+                <div class="foundwords-list-by-order">
+                    <ul class="foundwords-list" id="words-by-order">
+                        <!-- Found words will be added here -->
+                    </ul>
+                </div>
+                
+                <div class="foundwords-list-by-length hidden">
+                    <div class="word-group">
+                        <div class="word-group-header">4-letter</div>
+                        <ul class="foundwords-list" id="words-4-letter">
+                            <li class="empty-list">(No words found yet)</li>
+                        </ul>
+                    </div>
+                    <div class="word-group">
+                        <div class="word-group-header">5-letter</div>
+                        <ul class="foundwords-list" id="words-5-letter">
+                            <li class="empty-list">(No words found yet)</li>
+                        </ul>
+                    </div>
+                    <div class="word-group">
+                        <div class="word-group-header">6-letter+</div>
+                        <ul class="foundwords-list" id="words-6-letter">
+                            <li class="empty-list">(No words found yet)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
