@@ -14,8 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const listByOrder = document.querySelector('.foundwords-list-by-order');
     const listByLength = document.querySelector('.foundwords-list-by-length');
     const words4Letter = document.getElementById('words-4-letter');
-    const words5Letter = document.getElementById('words-5-letter');
     const words6Letter = document.getElementById('words-6-letter');
+    const words7Letter = document.getElementById('words-7-letter');
+    const words8Letter = document.getElementById('words-8-letter');
 
     // Valid words for the game (the ones that can be found)
     const validWords = ['POST', 'BUTIKK', 'VALLDAL', 'BUNNPRIS'];
@@ -31,22 +32,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Display total word count
     totalCountDisplay.textContent = gameData.totalWords;
 
-    // Tab switching for found words
+    // Set length tab as active by default
     tabButtons.forEach(tab => {
-        tab.addEventListener('click', function() {
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            
-            const sortType = this.dataset.sort;
-            if (sortType === 'order') {
-                listByOrder.classList.remove('hidden');
-                listByLength.classList.add('hidden');
-            } else {
-                listByOrder.classList.add('hidden');
-                listByLength.classList.remove('hidden');
-            }
-        });
+        if (tab.dataset.sort === 'length') {
+            tab.classList.add('active');
+        } else {
+            tab.remove(); // Remove the "order" tab
+        }
     });
+    
+    // Show only length list and hide order list
+    listByOrder.classList.add('hidden');
+    listByLength.classList.remove('hidden');
 
     // Event listeners for buttons
     shuffleButton.addEventListener('click', function() {
@@ -183,11 +180,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update count display
         foundCountDisplay.textContent = gameData.foundWords.length;
         
-        // Add to "by order" list
-        const orderListItem = document.createElement('li');
-        orderListItem.textContent = word;
-        foundWordsByOrder.appendChild(orderListItem);
-        
         // Remove "no words found" message if it exists
         const emptyLists = document.querySelectorAll('.empty-list');
         emptyLists.forEach(item => {
@@ -196,12 +188,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Add to appropriate length category
         let lengthList;
-        if (word.length <= 4) {
+        if (word.length === 4) {
             lengthList = words4Letter;
-        } else if (word.length === 5) {
-            lengthList = words5Letter;
-        } else {
+        } else if (word.length === 6) {
             lengthList = words6Letter;
+        } else if (word.length === 7) {
+            lengthList = words7Letter;
+        } else if (word.length === 8) {
+            lengthList = words8Letter;
         }
         
         const lengthListItem = document.createElement('li');
@@ -225,14 +219,17 @@ document.addEventListener('DOMContentLoaded', function() {
             case 4:
                 points = 10;
                 break;
-            case 5:
-                points = 15;
-                break;
             case 6:
-                points = 25;
+                points = 20;
+                break;
+            case 7:
+                points = 30;
+                break;
+            case 8:
+                points = 40;
                 break;
             default:
-                points = word.length * 5; // For longer words
+                points = word.length * 5; // For other word lengths
         }
         
         // Update game data score

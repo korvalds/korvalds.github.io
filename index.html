@@ -52,18 +52,15 @@
             <div class="words-counter">Words found: <b><span id="found-count">0</span> / <span id="total-count">0</span></b></div>
             
             <div class="foundwords-tabs">
-                <button class="foundwords-tab active" data-sort="order">By order</button>
-                <button class="foundwords-tab" data-sort="length">By length</button>
+                <button class="foundwords-tab active" data-sort="length">By length</button>
             </div>
             
             <div class="foundwords-list-container">
-                <div class="foundwords-list-by-order">
-                    <ul class="foundwords-list" id="words-by-order">
-                        <!-- Found words will be added here -->
-                    </ul>
+                <div class="foundwords-list-by-order" class="hidden">
+                    <!-- Kept for compatibility with JavaScript but hidden -->
                 </div>
                 
-                <div class="foundwords-list-by-length hidden">
+                <div class="foundwords-list-by-length">
                     <div class="word-group">
                         <div class="word-group-header">4-letter</div>
                         <ul class="foundwords-list" id="words-4-letter">
@@ -71,14 +68,20 @@
                         </ul>
                     </div>
                     <div class="word-group">
-                        <div class="word-group-header">5-letter</div>
-                        <ul class="foundwords-list" id="words-5-letter">
+                        <div class="word-group-header">6-letter</div>
+                        <ul class="foundwords-list" id="words-6-letter">
                             <li class="empty-list">(No words found yet)</li>
                         </ul>
                     </div>
                     <div class="word-group">
-                        <div class="word-group-header">6-letter+</div>
-                        <ul class="foundwords-list" id="words-6-letter">
+                        <div class="word-group-header">7-letter</div>
+                        <ul class="foundwords-list" id="words-7-letter">
+                            <li class="empty-list">(No words found yet)</li>
+                        </ul>
+                    </div>
+                    <div class="word-group">
+                        <div class="word-group-header">8-letter</div>
+                        <ul class="foundwords-list" id="words-8-letter">
                             <li class="empty-list">(No words found yet)</li>
                         </ul>
                     </div>
