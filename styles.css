@@ -92,13 +92,13 @@ h2 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #4a90e2;
+    background-color: #69a3ff; /* Changed to a lighter blue */
     z-index: 1;
     transition: background-color 0.2s;
 }
 
 .letter.selected .letter__bg {
-    background-color: #FF9500;
+    background-color: #FFD700; /* Changed to a more "chicken yellow" color */
 }
 
 .letter__fg {
@@ -148,7 +148,7 @@ h2 {
 }
 
 .control-button {
-    background-color: #4a90e2;
+    background-color: #69a3ff; /* Changed to a lighter blue */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -159,7 +159,7 @@ h2 {
 }
 
 .control-button:hover {
-    background-color: #3a80d2;
+    background-color: #5690ee; /* Adjusted hover state to match lighter blue */
 }
 
 /* Found Words Container */
@@ -196,8 +196,8 @@ h2 {
 }
 
 .foundwords-tab.active {
-    color: #4a90e2;
-    border-bottom-color: #4a90e2;
+    color: #69a3ff; /* Changed to a lighter blue */
+    border-bottom-color: #69a3ff; /* Changed to a lighter blue */
 }
 
 /* Found Words Lists */
@@ -275,7 +275,7 @@ h2 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Changed from 0.8 to 0.4 for better confetti visibility */
+    background-color: rgba(0, 0, 0, 0.4);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -297,7 +297,7 @@ h2 {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     animation: messageAppear 0.8s ease-out;
     position: relative;
-    z-index: 1001; /* Ensure the message is above the confetti */
+    z-index: 1001;
 }
 
 @keyframes messageAppear {
@@ -307,7 +307,7 @@ h2 {
 }
 
 .completion-message h2 {
-    color: #4a90e2;
+    color: #69a3ff; /* Changed to a lighter blue */
     font-size: 2.5rem;
     margin-bottom: 20px;
 }
@@ -325,20 +325,12 @@ h2 {
     font-weight: bold;
     display: block;
     margin: 5px 0;
-    /* Animation removed */
-}
-
-/* Remove the animation keyframes that are no longer needed */
-@keyframes wordPulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
 }
 
 /* Ensure confetti is in the foreground */
 canvas.confetti-canvas {
     position: fixed !important;
-    z-index: 2000 !important; /* Higher than anything else to ensure it's in the foreground */
+    z-index: 2000 !important;
     pointer-events: none;
 }
 
