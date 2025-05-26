@@ -44,8 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Event listeners for buttons
     shuffleButton.addEventListener('click', function() {
-        // Placeholder for shuffle functionality
-        console.log('Shuffle button clicked');
+        shuffleBoard();
     });
 
     clearButton.addEventListener('click', function() {
@@ -61,11 +60,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Function to shuffle the letters on the board
+    function shuffleBoard() {
+        const letterElements = Array.from(letters);
+        const labelContents = letterElements.map(letter => letter.querySelector('.letter__label').textContent);
+        
+        // Fisher-Yates shuffle algorithm
+        for (let i = labelContents.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [labelContents[i], labelContents[j]] = [labelContents[j], labelContents[i]];
+        }
+        
+        // Update the letter labels with the shuffled content
+        letterElements.forEach((letter, index) => {
+            letter.querySelector('.letter__label').textContent = labelContents[index];
+        });
+        
+        console.log('Board shuffled!');
+    }
+
     // Functions to be implemented:
     // 1. initializeGame() - Set up the game board with letters
     // 2. handleLetterSelection() - Handle user selecting letters
     // 3. validateWord() - Check if selected letters form a valid word
     // 4. addFoundWord() - Add word to found words list
     // 5. updateScore() - Update the user's score
-    // 6. shuffleBoard() - Rearrange letters on the board
 });
