@@ -211,7 +211,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check for game completion
         if (gameData.foundWords.length === gameData.totalWords) {
             setTimeout(() => {
-                alert('Congratulations! You found all the words!');
+                showCompletionMessage();
+                startConfetti();
             }, 1000);
         }
     }
@@ -253,5 +254,100 @@ document.addEventListener('DOMContentLoaded', function() {
                 pointsPopup.remove();
             }, 500);
         }, 100);
+    }
+    
+    // Function to show completion message
+    function showCompletionMessage() {
+        // Create the message overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'completion-overlay';
+        
+        // Create message container
+        const messageContainer = document.createElement('div');
+        messageContainer.className = 'completion-message';
+        
+        // Create congratulation text
+        const congratsText = document.createElement('h2');
+        congratsText.textContent = 'Gratulerer!';
+        
+        // Create the special message
+        const specialMessage = document.createElement('div');
+        specialMessage.className = 'special-message';
+        specialMessage.innerHTML = 'Neste stopp: <br><span class="message-word">BUNNPRIS</span>, <span class="message-word">POST I BUTIKK</span>, <span class="message-word">VALLDAL</span>';
+        
+        // Append elements
+        messageContainer.appendChild(congratsText);
+        messageContainer.appendChild(specialMessage);
+        overlay.appendChild(messageContainer);
+        document.body.appendChild(overlay);
+        
+        // Add click event to remove overlay
+        overlay.addEventListener('click', function() {
+            overlay.classList.add('fadeout');
+            setTimeout(() => {
+                overlay.remove();
+            }, 500);
+        });
+    }
+    
+    // Canvas confetti animation using the canvas-confetti library
+    function startConfetti() {
+        // Initial confetti burst
+        confetti({
+            particleCount: 200,
+            spread: 80,
+            origin: { y: 0.6 }
+        });
+        
+        // Confetti cannon from left
+        setTimeout(() => {
+            confetti({
+                particleCount: 50,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 }
+            });
+        }, 250);
+        
+        // Confetti cannon from right
+        setTimeout(() => {
+            confetti({
+                particleCount: 50,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 }
+            });
+        }, 400);
+        
+        // Final confetti shower with custom colors
+        setTimeout(() => {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            
+            // Create a confetti shower that lasts longer with school colors
+            const end = Date.now() + 3000;
+            
+            const confettiInterval = setInterval(function() {
+                if (Date.now() > end) {
+                    return clearInterval(confettiInterval);
+                }
+                
+                confetti({
+                    particleCount: 2,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: colors
+                });
+                
+                confetti({
+                    particleCount: 2,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: colors
+                });
+                
+            }, 50);
+        }, 1000);
     }
 });
