@@ -32,6 +32,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Display total word count
     totalCountDisplay.textContent = gameData.totalWords;
 
+    // Create a score element in the words-counter div
+    const wordsCounter = document.querySelector('.words-counter');
+    const scoreElement = document.createElement('span');
+    scoreElement.id = 'words-score';
+    scoreElement.innerHTML = 'Score: <span id="score-value">0</span>';
+    wordsCounter.appendChild(scoreElement);
+
     // Set length tab as active by default
     tabButtons.forEach(tab => {
         if (tab.dataset.sort === 'length') {
@@ -68,12 +75,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Check if letter is already selected
         if (letterElement.classList.contains('selected')) {
-            // If it's the last letter added, remove it
-            if (gameData.currentSelection.length > 0 && 
-                gameData.currentSelection[gameData.currentSelection.length - 1].position === position) {
-                
-                // Remove from selection
-                gameData.currentSelection.pop();
+            // Allow unselecting any letter regardless of selection order
+            const selectionIndex = gameData.currentSelection.findIndex(item => item.position === position);
+            if (selectionIndex !== -1) {
+                // Remove from selection array
+                gameData.currentSelection.splice(selectionIndex, 1);
                 letterElement.classList.remove('selected');
                 updateCurrentWordDisplay();
             }
@@ -106,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
         gameData.currentSelection.forEach(item => {
             const li = document.createElement('li');
             li.textContent = item.letter;
+            li.style.fontWeight = 'bold'; // Make the selected word bold
             currentWordDisplay.appendChild(li);
         });
     }
@@ -235,14 +242,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update game data score
         gameData.score += points;
         
-        // Update score display
+        // Update score displays
         scoreDisplay.textContent = gameData.score;
+        document.getElementById('score-value').textContent = gameData.score;
         
         // Visual feedback for points (optional)
         const pointsPopup = document.createElement('div');
         pointsPopup.className = 'points-popup';
         pointsPopup.textContent = `+${points}`;
-        document.querySelector('.scorebar').appendChild(pointsPopup);
+        document.querySelector('.game-area').appendChild(pointsPopup); // Append to game-area instead of scorebar
         
         // Animate and remove
         setTimeout(() => {

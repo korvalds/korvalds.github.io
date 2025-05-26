@@ -19,19 +19,19 @@
 
             <div class="board-container">
                 <div class="gameboard">
-                    <!-- 3x4 grid for the letters -->
+                    <!-- 4x3 grid for the letters (changed from 3x4) -->
                     <div class="letter" data-position="0-0"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">PO</div></div></div>
                     <div class="letter" data-position="1-0"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">IS</div></div></div>
                     <div class="letter" data-position="2-0"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">ME</div></div></div>
+                    <div class="letter" data-position="3-0"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">BU</div></div></div>
                     <div class="letter" data-position="0-1"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">DAL</div></div></div>
                     <div class="letter" data-position="1-1"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">PR</div></div></div>
-                    <div class="letter" data-position="2-1"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">BU</div></div></div>
+                    <div class="letter" data-position="2-1"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">TI</div></div></div>
+                    <div class="letter" data-position="3-1"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">KK</div></div></div>
                     <div class="letter" data-position="0-2"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">ST</div></div></div>
-                    <div class="letter" data-position="1-2"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">TI</div></div></div>
-                    <div class="letter" data-position="2-2"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">VA</div></div></div>
-                    <div class="letter" data-position="0-3"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">KK</div></div></div>
-                    <div class="letter" data-position="1-3"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">NN</div></div></div>
-                    <div class="letter" data-position="2-3"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">LL</div></div></div>
+                    <div class="letter" data-position="1-2"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">VA</div></div></div>
+                    <div class="letter" data-position="2-2"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">LL</div></div></div>
+                    <div class="letter" data-position="3-2"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">NN</div></div></div>
                 </div>
             </div>
 
@@ -50,10 +50,6 @@
         <div class="foundwords-container">
             <h2>Found Words</h2>
             <div class="words-counter">Words found: <b><span id="found-count">0</span> / <span id="total-count">0</span></b></div>
-            
-            <div class="foundwords-tabs">
-                <button class="foundwords-tab active" data-sort="length">By length</button>
-            </div>
             
             <div class="foundwords-list-container">
                 <div class="foundwords-list-by-order" class="hidden">
