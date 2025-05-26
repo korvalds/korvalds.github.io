@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create the special message
         const specialMessage = document.createElement('div');
         specialMessage.className = 'special-message';
-        specialMessage.innerHTML = 'Neste stopp: <br>' + 
+        specialMessage.innerHTML = 'Det neste brevet befinner seg hos: <br>' + 
             '<span class="message-word">BUNNPRIS</span>' +
             '<span class="message-word">POST I BUTIKK</span>' +
             '<span class="message-word">VALLDAL</span>';
