@@ -238,6 +238,36 @@ h2 {
     font-style: italic;
 }
 
+/* Points Popup Animation */
+.points-popup {
+    position: absolute;
+    right: 10px;
+    color: #4caf50;
+    font-size: 1.2rem;
+    font-weight: bold;
+    animation: popup 0.5s ease-out;
+    opacity: 1;
+    z-index: 100;
+}
+
+.points-popup.fadeout {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.5s ease-out;
+}
+
+@keyframes popup {
+    0% { transform: scale(0.5); opacity: 0; }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Visual feedback for found words */
+.letter.found .letter__bg {
+    background-color: #4caf50;
+    transition: background-color 0.3s;
+}
+
 /* Responsive design for mobile */
 @media (max-width: 480px) {
     body {

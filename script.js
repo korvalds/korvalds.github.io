@@ -13,12 +13,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const tabButtons = document.querySelectorAll('.foundwords-tab');
     const listByOrder = document.querySelector('.foundwords-list-by-order');
     const listByLength = document.querySelector('.foundwords-list-by-length');
+    const words4Letter = document.getElementById('words-4-letter');
+    const words5Letter = document.getElementById('words-5-letter');
+    const words6Letter = document.getElementById('words-6-letter');
+
+    // Valid words for the game (the ones that can be found)
+    const validWords = ['POST', 'BUTIKK', 'VALLDAL', 'BUNNPRIS'];
 
     // Game data placeholder
     const gameData = {
         score: 0,
         foundWords: [],
-        totalWords: 20, // Placeholder for total number of words
+        totalWords: validWords.length, // Total number of words to find
         currentSelection: []
     };
 
@@ -88,8 +94,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update word display
         updateCurrentWordDisplay();
         
-        // Optional: Validate word if needed
-        // validateWord();
+        // Check if word is valid after each selection
+        validateWord();
     }
     
     // Function to update the current word display
@@ -139,8 +145,113 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Board shuffled!');
     }
 
-    // Functions to be implemented:
-    // 1. validateWord() - Check if selected letters form a valid word
-    // 2. addFoundWord() - Add word to found words list
-    // 3. updateScore() - Update the user's score
+    // Function to validate if the current selection forms a valid word
+    function validateWord() {
+        if (gameData.currentSelection.length === 0) return;
+        
+        // Get the current word from selection
+        const currentWord = gameData.currentSelection.map(item => item.letter).join('');
+        
+        // Check if it's a valid word and hasn't been found yet
+        if (validWords.includes(currentWord) && !gameData.foundWords.includes(currentWord)) {
+            // Add word to found words
+            addFoundWord(currentWord);
+            
+            // Update score based on word length
+            updateScore(currentWord);
+            
+            // Provide visual feedback (optional)
+            gameData.currentSelection.forEach(item => {
+                item.element.classList.add('found');
+                setTimeout(() => {
+                    item.element.classList.remove('found');
+                }, 1000);
+            });
+            
+            // Clear selection after a short delay
+            setTimeout(() => {
+                clearSelection();
+            }, 1000);
+        }
+    }
+    
+    // Function to add a found word to the lists
+    function addFoundWord(word) {
+        // Add to game data
+        gameData.foundWords.push(word);
+        
+        // Update count display
+        foundCountDisplay.textContent = gameData.foundWords.length;
+        
+        // Add to "by order" list
+        const orderListItem = document.createElement('li');
+        orderListItem.textContent = word;
+        foundWordsByOrder.appendChild(orderListItem);
+        
+        // Remove "no words found" message if it exists
+        const emptyLists = document.querySelectorAll('.empty-list');
+        emptyLists.forEach(item => {
+            item.parentNode.removeChild(item);
+        });
+        
+        // Add to appropriate length category
+        let lengthList;
+        if (word.length <= 4) {
+            lengthList = words4Letter;
+        } else if (word.length === 5) {
+            lengthList = words5Letter;
+        } else {
+            lengthList = words6Letter;
+        }
+        
+        const lengthListItem = document.createElement('li');
+        lengthListItem.textContent = word;
+        lengthList.appendChild(lengthListItem);
+        
+        // Check for game completion
+        if (gameData.foundWords.length === gameData.totalWords) {
+            setTimeout(() => {
+                alert('Congratulations! You found all the words!');
+            }, 1000);
+        }
+    }
+    
+    // Function to update the score
+    function updateScore(word) {
+        // Score based on word length - more points for longer words
+        let points;
+        switch(word.length) {
+            case 4:
+                points = 10;
+                break;
+            case 5:
+                points = 15;
+                break;
+            case 6:
+                points = 25;
+                break;
+            default:
+                points = word.length * 5; // For longer words
+        }
+        
+        // Update game data score
+        gameData.score += points;
+        
+        // Update score display
+        scoreDisplay.textContent = gameData.score;
+        
+        // Visual feedback for points (optional)
+        const pointsPopup = document.createElement('div');
+        pointsPopup.className = 'points-popup';
+        pointsPopup.textContent = `+${points}`;
+        document.querySelector('.scorebar').appendChild(pointsPopup);
+        
+        // Animate and remove
+        setTimeout(() => {
+            pointsPopup.classList.add('fadeout');
+            setTimeout(() => {
+                pointsPopup.remove();
+            }, 500);
+        }, 100);
+    }
 });
