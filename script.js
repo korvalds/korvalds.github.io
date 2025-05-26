@@ -48,17 +48,74 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     clearButton.addEventListener('click', function() {
-        // Placeholder for clear selection functionality
-        console.log('Clear button clicked');
+        clearSelection();
     });
 
     // Event listeners for letter tiles
     letters.forEach(letter => {
         letter.addEventListener('click', function() {
-            // Placeholder for letter selection functionality
-            console.log('Letter clicked:', this.querySelector('.letter__label').textContent);
+            handleLetterSelection(this);
         });
     });
+
+    // Function to handle letter selection
+    function handleLetterSelection(letterElement) {
+        const letterText = letterElement.querySelector('.letter__label').textContent;
+        const position = letterElement.dataset.position;
+        
+        // Check if letter is already selected
+        if (letterElement.classList.contains('selected')) {
+            // If it's the last letter added, remove it
+            if (gameData.currentSelection.length > 0 && 
+                gameData.currentSelection[gameData.currentSelection.length - 1].position === position) {
+                
+                // Remove from selection
+                gameData.currentSelection.pop();
+                letterElement.classList.remove('selected');
+                updateCurrentWordDisplay();
+            }
+            return;
+        }
+        
+        // Add letter to selection
+        letterElement.classList.add('selected');
+        gameData.currentSelection.push({
+            letter: letterText,
+            element: letterElement,
+            position: position
+        });
+        
+        // Update word display
+        updateCurrentWordDisplay();
+        
+        // Optional: Validate word if needed
+        // validateWord();
+    }
+    
+    // Function to update the current word display
+    function updateCurrentWordDisplay() {
+        currentWordDisplay.innerHTML = '';
+        
+        if (gameData.currentSelection.length === 0) {
+            return;
+        }
+        
+        gameData.currentSelection.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item.letter;
+            currentWordDisplay.appendChild(li);
+        });
+    }
+    
+    // Function to clear the current selection
+    function clearSelection() {
+        gameData.currentSelection.forEach(item => {
+            item.element.classList.remove('selected');
+        });
+        
+        gameData.currentSelection = [];
+        updateCurrentWordDisplay();
+    }
 
     // Function to shuffle the letters on the board
     function shuffleBoard() {
@@ -76,13 +133,14 @@ document.addEventListener('DOMContentLoaded', function() {
             letter.querySelector('.letter__label').textContent = labelContents[index];
         });
         
+        // Clear any existing selection when shuffling
+        clearSelection();
+        
         console.log('Board shuffled!');
     }
 
     // Functions to be implemented:
-    // 1. initializeGame() - Set up the game board with letters
-    // 2. handleLetterSelection() - Handle user selecting letters
-    // 3. validateWord() - Check if selected letters form a valid word
-    // 4. addFoundWord() - Add word to found words list
-    // 5. updateScore() - Update the user's score
+    // 1. validateWord() - Check if selected letters form a valid word
+    // 2. addFoundWord() - Add word to found words list
+    // 3. updateScore() - Update the user's score
 });

@@ -78,6 +78,10 @@ h2 {
     transition: transform 0.2s;
 }
 
+.letter.selected {
+    transform: scale(1.05);
+}
+
 .letter:hover {
     transform: scale(1.05);
 }
@@ -90,6 +94,11 @@ h2 {
     height: 100%;
     background-color: #4a90e2;
     z-index: 1;
+    transition: background-color 0.2s;
+}
+
+.letter.selected .letter__bg {
+    background-color: #FF9500;
 }
 
 .letter__fg {
