@@ -273,7 +273,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create the special message
         const specialMessage = document.createElement('div');
         specialMessage.className = 'special-message';
-        specialMessage.innerHTML = 'Neste stopp: <br><span class="message-word">BUNNPRIS</span>, <span class="message-word">POST I BUTIKK</span>, <span class="message-word">VALLDAL</span>';
+        specialMessage.innerHTML = 'Neste stopp: <br>' + 
+            '<span class="message-word">BUNNPRIS</span>' +
+            '<span class="message-word">POST I BUTIKK</span>' +
+            '<span class="message-word">VALLDAL</span>';
         
         // Append elements
         messageContainer.appendChild(congratsText);
