@@ -18,6 +18,9 @@
             </div>
 
             <div class="board-container">
+                <div class="word-display">
+                    <ul id="current-word" class="flex"></ul>
+                </div>
                 <div class="gameboard">
                     <!-- 4x3 grid for the letters (changed from 3x4) -->
                     <div class="letter" data-position="0-0"><div class="letter__bg"></div><div class="letter__fg"><div class="letter__label">PO</div></div></div>
@@ -35,12 +38,6 @@
                 </div>
             </div>
 
-            <div class="game-input">
-                <div class="word-display">
-                    <ul id="current-word" class="flex"></ul>
-                </div>
-            </div>
-
             <div class="controls">
                 <button class="control-button" id="shuffle-button">Shuffle</button>
                 <button class="control-button" id="clear-button">Clear</button>
@@ -49,7 +46,10 @@
 
         <div class="foundwords-container">
             <h2>Found Words</h2>
-            <div class="words-counter">Words found: <b><span id="found-count">0</span> / <span id="total-count">0</span></b></div>
+            <div class="words-counter">
+                <span>Words found: <b><span id="found-count">0</span> / <span id="total-count">0</span></b></span>
+                <span id="words-score">Score: <span id="score-value">0</span></span>
+            </div>
             
             <div class="foundwords-list-container">
                 <div class="foundwords-list-by-order" class="hidden">

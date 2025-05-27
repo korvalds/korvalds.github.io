@@ -32,13 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Display total word count
     totalCountDisplay.textContent = gameData.totalWords;
 
-    // Create a score element in the words-counter div
-    const wordsCounter = document.querySelector('.words-counter');
-    const scoreElement = document.createElement('span');
-    scoreElement.id = 'words-score';
-    scoreElement.innerHTML = 'Score: <span id="score-value">0</span>';
-    wordsCounter.appendChild(scoreElement);
-
+    // Don't create score element as it's now in HTML
+    
     // Set length tab as active by default
     tabButtons.forEach(tab => {
         if (tab.dataset.sort === 'length') {
@@ -158,6 +153,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Check if it's a valid word and hasn't been found yet
         if (validWords.includes(currentWord) && !gameData.foundWords.includes(currentWord)) {
+            // Show "Correct" pill animation
+            showCorrectPill();
+            
             // Add word to found words
             addFoundWord(currentWord);
             
@@ -179,13 +177,41 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // Function to show the "Correct" pill animation
+    function showCorrectPill() {
+        // Create the correct pill element
+        const correctPill = document.createElement('div');
+        correctPill.className = 'correct-pill';
+        correctPill.textContent = 'Correct!';
+        
+        // Keep the current word displayed for a moment so the last letter is visible
+        // Then add the pill after a delay
+        setTimeout(() => {
+            // Now clear the current word display and add the pill
+            currentWordDisplay.innerHTML = '';
+            currentWordDisplay.appendChild(correctPill);
+        }, 250); // 300ms delay to ensure last letter is visible
+        
+        // Remove after animation ends
+        setTimeout(() => {
+            // The word will be cleared by clearSelection after this anyway
+            correctPill.remove();
+        }, 2000); // Adjusted to account for the initial delay
+    }
+    
     // Function to add a found word to the lists
     function addFoundWord(word) {
         // Add to game data
         gameData.foundWords.push(word);
         
-        // Update count display
+        // Update count display and add highlight animation
         foundCountDisplay.textContent = gameData.foundWords.length;
+        foundCountDisplay.classList.add('highlight-animation');
+        
+        // Remove animation class after animation completes
+        setTimeout(() => {
+            foundCountDisplay.classList.remove('highlight-animation');
+        }, 800);
         
         // Remove "no words found" message if it exists
         const emptyLists = document.querySelectorAll('.empty-list');
@@ -242,23 +268,20 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update game data score
         gameData.score += points;
         
-        // Update score displays
+        // Update score displays and add highlight animation
         scoreDisplay.textContent = gameData.score;
-        document.getElementById('score-value').textContent = gameData.score;
+        scoreDisplay.classList.add('highlight-animation');
         
-        // Visual feedback for points (optional)
-        const pointsPopup = document.createElement('div');
-        pointsPopup.className = 'points-popup';
-        pointsPopup.textContent = `+${points}`;
-        document.querySelector('.game-area').appendChild(pointsPopup); // Append to game-area instead of scorebar
+        // Also highlight the score in the words counter
+        const scoreValue = document.getElementById('score-value');
+        scoreValue.textContent = gameData.score;
+        scoreValue.classList.add('highlight-animation');
         
-        // Animate and remove
+        // Remove animation classes after animation completes
         setTimeout(() => {
-            pointsPopup.classList.add('fadeout');
-            setTimeout(() => {
-                pointsPopup.remove();
-            }, 500);
-        }, 100);
+            scoreDisplay.classList.remove('highlight-animation');
+            scoreValue.classList.remove('highlight-animation');
+        }, 800);
     }
     
     // Function to show completion message
