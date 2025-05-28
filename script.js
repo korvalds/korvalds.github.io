@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Create congratulation text
         const congratsText = document.createElement('h2');
-        congratsText.textContent = 'Gratulerer!';
+        congratsText.textContent = '🎉 Gratulerer! 🎉';
         
         // Create the special message
         const specialMessage = document.createElement('div');
