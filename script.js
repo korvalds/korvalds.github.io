@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear any existing selection when shuffling
         clearSelection();
         
-        console.log('Board shuffled!');
+        console.log('Bokstavene er stokket om!');
     }
 
     // Function to validate if the current selection forms a valid word
@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Create the correct pill element
         const correctPill = document.createElement('div');
         correctPill.className = 'correct-pill';
-        correctPill.textContent = 'Correct!';
+        correctPill.textContent = 'Riktig!';
         
         // Keep the current word displayed for a moment so the last letter is visible
         // Then add the pill after a delay
